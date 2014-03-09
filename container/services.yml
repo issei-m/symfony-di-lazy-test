@@ -1,0 +1,20 @@
+parameters:
+    stopwatch_event_name: symfony-di
+
+services:
+    stopwatch:
+        class: Symfony\Component\Stopwatch\Stopwatch
+        calls:
+            - [ start, [ %stopwatch_event_name% ] ]
+
+    foo:
+        class: Issei\Classes\Foo
+        arguments: [ @bar, @stopwatch, %stopwatch_event_name% ]
+
+    bar:
+        class: Issei\Classes\Bar
+        arguments: [ @piyo, @stopwatch, %stopwatch_event_name% ]
+
+    piyo:
+        class: Issei\Classes\Piyo
+        arguments: [ @stopwatch, %stopwatch_event_name% ]
