@@ -7,10 +7,11 @@ use Issei\ContainerBuilder;
 $builder = new ContainerBuilder(__DIR__ . '/container');
 $container = $builder->build();
 
-var_dump($container->get('foo'));
+var_dump($container->get('foo')->hoge());
 
 /** @var $stopwatch \Symfony\Component\Stopwatch\Stopwatch */
 $stopwatch = $container->get('stopwatch');
-$stopwatch->stop($container->getParameter('stopwatch_event_name'));
 
-var_dump($stopwatch->getSectionEvents($container->getParameter('stopwatch_event_name')));
+//$stopwatch->stop($container->getParameter('stopwatch_event_name'));
+//
+//var_dump($stopwatch->getSectionEvents($container->getParameter('stopwatch_event_name')));

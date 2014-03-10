@@ -16,4 +16,9 @@ class Foo extends Base
         $this->bar = $bar;
         parent::__construct($stopwatch, $stopwatchEventName);
     }
+
+    public function hoge()
+    {
+        return $this->bar->hoge();
+    }
 }

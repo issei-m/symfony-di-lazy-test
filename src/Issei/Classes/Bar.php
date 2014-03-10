@@ -16,4 +16,9 @@ class Bar extends Base
         $this->piyo = $piyo;
         parent::__construct($stopwatch, $stopwatchEventName);
     }
+
+    public function hoge()
+    {
+        return $this->piyo->getFoobar();
+    }
 }

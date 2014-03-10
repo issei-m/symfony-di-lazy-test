@@ -8,8 +8,13 @@ class Piyo extends Base
 {
     public function __construct(Stopwatch $stopwatch, $stopwatchEventName)
     {
-//        sleep(1);
+        usleep(500000);
 
         parent::__construct($stopwatch, $stopwatchEventName);
+    }
+
+    public function getFoobar()
+    {
+        return 'Foobar!';
     }
 }

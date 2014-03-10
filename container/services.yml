@@ -18,3 +18,4 @@ services:
     piyo:
         class: Issei\Classes\Piyo
         arguments: [ @stopwatch, %stopwatch_event_name% ]
+        lazy: true

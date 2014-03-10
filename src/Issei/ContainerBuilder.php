@@ -2,6 +2,8 @@
 
 namespace Issei;
 
+use Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator;
+use Symfony\Bridge\ProxyManager\LazyProxy\PhpDumper\ProxyDumper;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -28,12 +30,20 @@ class ContainerBuilder
         if (!$cache->isFresh()) {
             $builder = new \Symfony\Component\DependencyInjection\ContainerBuilder();
 
+            if (class_exists('ProxyManager\Configuration')) {
+                $builder->setProxyInstantiator(new RuntimeInstantiator());
+            }
+
             $loader = new YamlFileLoader($builder, new FileLocator($this->containerDir));
             $loader->load('services.yml');
 
             $builder->compile();
 
             $dumper = new PhpDumper($builder);
+            if (class_exists('ProxyManager\Configuration')) {
+                $dumper->setProxyDumper(new ProxyDumper());
+            }
+
             $cache->write($dumper->dump(['class' => $class, 'base_class' => 'Container']));
         }
 
